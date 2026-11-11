@@ -1,33 +1,340 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#101018"><meta name="description" content="Explore Sad, Love and Islamic poetry images at Poetry Hub.">
-<title>Poetry Hub — A World of Words</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Poetry Hub</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root{--bg:#0d0d14;--panel:#191923;--gold:#d8b66a;--gold2:#f1d99b;--text:#f7f3eb;--muted:#b9b4aa;--line:rgba(216,182,106,.28)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--text);font-family:Georgia,serif;background:radial-gradient(ellipse at 15% 5%,rgba(100,73,130,.24),transparent 34%),radial-gradient(ellipse at 90% 30%,rgba(155,117,48,.16),transparent 32%),linear-gradient(145deg,#0b0b12,#15131c 55%,#0b0b12)}
-button{font:inherit;cursor:pointer}.site-header{text-align:center;padding:28px 15px 24px;border-bottom:1px solid var(--line);background:rgba(8,8,13,.8)}.brand{display:flex;align-items:center;justify-content:center;gap:14px}.logo{width:60px;height:60px;border:1.5px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold2);font-size:29px}.brand-name{margin:0;color:var(--gold2);font-size:clamp(27px,5vw,44px);letter-spacing:3px}.tagline{margin:8px 0 0;color:var(--muted);font:12px Arial;letter-spacing:3px;text-transform:uppercase}
-.topbar{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;padding:15px;background:rgba(13,13,20,.94);position:sticky;top:0;z-index:5;border-bottom:1px solid rgba(255,255,255,.06)}.nav-btn,.back-btn,.action-btn{border:1px solid var(--line);background:#ffffff08;color:var(--text);padding:10px 16px;border-radius:999px}.nav-btn.active,.nav-btn:hover{background:linear-gradient(120deg,#b58c43,#f0d99d);color:#17130c;border-color:transparent}.container{max-width:1150px;margin:auto;padding:20px}.hero{text-align:center;margin:28px auto 20px;padding:38px 22px;border:1px solid var(--line);border-radius:25px;background:linear-gradient(135deg,#272030e0,#171720e8)}.hero h2{font-size:clamp(27px,5vw,43px);font-weight:normal;color:var(--gold2);margin:0 0 12px}.hero p,.section-heading p{color:var(--muted);font:14px/1.8 Arial}.section-heading{text-align:center;margin:34px 0 22px}.section-heading h2,.page-head h2{color:var(--gold2);font-weight:normal}.category-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.category-card{min-height:175px;text-align:center;padding:24px 14px;border-radius:20px;border:1px solid var(--line);background:linear-gradient(145deg,#23222f,#14141d);color:var(--text)}.category-card:hover{border-color:var(--gold);transform:translateY(-3px)}.category-icon{font-size:32px;margin-bottom:12px}.category-card h3{margin:0 0 8px;color:var(--gold2);font-size:21px;font-weight:normal}.category-card p{margin:0;color:var(--muted);font:13px Arial}.page-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:20px 0}.page-head h2{font-size:28px;margin:0}.back-btn{color:var(--gold2)}.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}.photo-card{overflow:hidden;border-radius:17px;border:1px solid var(--line);background:var(--panel)}.photo-card img{display:block;width:100%;height:auto;max-height:520px;object-fit:contain;background:#09090e;cursor:zoom-in}.photo-meta{padding:12px}.photo-meta small{color:var(--gold2);font:12px Arial;letter-spacing:1px}.photo-actions{display:flex;gap:8px;margin-top:10px}.action-btn{font:12px Arial;padding:8px 13px}.action-btn:hover{border-color:var(--gold);color:var(--gold2)}.empty{padding:35px;text-align:center;border:1px dashed var(--line);border-radius:18px;color:var(--muted);grid-column:1/-1}.hidden{display:none!important}footer{text-align:center;padding:28px 15px;margin-top:45px;border-top:1px solid var(--line);color:var(--muted);font:12px Arial}footer strong{display:block;color:var(--gold2);font:18px Georgia;letter-spacing:2px;margin-bottom:8px}.lightbox{position:fixed;inset:0;background:#000e;z-index:20;display:none;align-items:center;justify-content:center;padding:20px}.lightbox.open{display:flex}.lightbox img{max-width:95vw;max-height:88vh;object-fit:contain}.lightbox button{position:absolute;top:18px;right:18px;background:var(--gold);color:#111;border:0;border-radius:50%;width:42px;height:42px;font-size:22px}
-@media(max-width:700px){.category-grid{grid-template-columns:1fr}.category-card{min-height:145px}.container{padding:14px}.hero{padding:28px 16px;margin:18px 0}.site-header:before,.site-header:after{display:none}}
-</style></head><body>
-<header class="site-header"><div class="brand"><div class="logo">✒</div><div><h1 class="brand-name">POETRY HUB</h1><p class="tagline">A World of Words & Feelings</p></div></div></header>
-<nav class="topbar" aria-label="Main navigation"><button class="nav-btn active" data-page="home">Home</button><button class="nav-btn" data-page="sad">Sad Poetry</button><button class="nav-btn" data-page="love">Love Poetry</button><button class="nav-btn" data-page="islamic">Islamic Poetry</button></nav>
-<main class="container"><section id="homePage"><div class="hero"><h2>Welcome to Poetry Hub</h2><p>A beautiful collection of poetry images — feelings, love and faith, gathered in one place.</p></div><div class="section-heading"><h2>Explore Our Collections</h2><p>Choose a category to explore the poetry images</p></div><div class="category-grid"><button class="category-card" data-page="sad"><div class="category-icon">🥀</div><h3>Sad Poetry</h3><p>Words for feelings and memories</p></button><button class="category-card" data-page="love"><div class="category-icon">♡</div><h3>Love Poetry</h3><p>Words of love and affection</p></button><button class="category-card" data-page="islamic"><div class="category-icon">☪</div><h3>Islamic Poetry</h3><p>Faith, devotion and reflection</p></button></div></section>
-<section id="categoryPage" class="hidden"><div class="page-head"><h2 id="categoryTitle"></h2><button class="back-btn" id="homeBack">← Back to Home</button></div><div class="gallery" id="gallery"></div></section></main>
-<footer><strong>POETRY HUB</strong>Sad Poetry · Love Poetry · Islamic Poetry<br><br>© 2026 Poetry Hub</footer>
-<div class="lightbox" id="lightbox"><button id="closeLightbox" aria-label="Close">×</button><img id="lightboxImage" alt="Poetry image preview"></div>
+*{box-sizing:border-box}
+body{margin:0;background:#101010;color:#eee;font-family:Arial,sans-serif}
+header{text-align:center;padding:28px 12px;background:#080808;border-bottom:2px solid #c9a33b}
+header h1{color:#d7b44a;margin:0;font-size:34px}
+header p{color:#ccc}
+nav{text-align:center;padding:15px}
+button{background:#c9a33b;color:#111;border:0;padding:10px 16px;margin:5px;border-radius:6px;cursor:pointer;font-weight:bold}
+button:hover{background:#f0d477}
+input,select{padding:11px;margin:7px 0;width:100%;border:1px solid #c9a33b;border-radius:5px;background:#222;color:white}
+.container{max-width:1050px;margin:auto;padding:15px}
+.panel{background:#1c1c1c;border:1px solid #9e7c2c;border-radius:10px;padding:18px;margin:15px 0}
+h2{color:#d7b44a}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{background:#202020;border:1px solid #806525;border-radius:9px;padding:10px}
+.card img{width:100%;height:240px;object-fit:cover;border-radius:6px}
+.card p{color:#ddd;overflow-wrap:anywhere}
+.hidden{display:none!important}
+#message{padding:10px;color:#f0d477}
+footer{text-align:center;padding:25px;color:#aaa}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Poetry Hub</h1>
+<p>Words That Touch The Heart</p>
+</header>
+
+<nav>
+<button onclick="showCategory('all')">Home</button>
+<button onclick="showCategory('sad')">Sad Poetry</button>
+<button onclick="showCategory('love')">Love Poetry</button>
+<button onclick="showCategory('islamic')">Islamic Poetry</button>
+</nav>
+
+<div class="container">
+<div class="panel">
+<h2>Welcome to Poetry Hub</h2>
+<p>Explore beautiful Urdu poetry in different categories.</p>
+</div>
+
+<div class="panel">
+<h2>Admin Login</h2>
+<div id="loginBox">
+<input id="email" type="email" placeholder="Admin Email">
+<input id="password" type="password" placeholder="Admin Password">
+<button onclick="login()">Login</button>
+</div>
+<div id="adminBox" class="hidden">
+<p>Admin Panel میں خوش آمدید۔</p>
+<select id="category">
+<option value="sad">Sad Poetry</option>
+<option value="love">Love Poetry</option>
+<option value="islamic">Islamic Poetry</option>
+</select>
+<input id="imageFile" type="file" accept="image/*">
+<input id="caption" type="text" placeholder="Poetry Caption (اختیاری)">
+<button onclick="uploadImage()">Upload Image</button>
+<button onclick="logout()">Logout</button>
+</div>
+<div id="message"></div>
+</div>
+
+<h2 id="galleryTitle">All Poetry</h2>
+<div id="gallery" class="gallery"></div>
+</div>
+
+<footer>© 2026 Poetry Hub</footer>
+
 <script>
-// Add each new image to the matching list below, using its exact filename in the GitHub repository.
-const collections={
- sad:{title:'🥀 Sad Poetry',label:'SAD POETRY',images:[{file:'sad-poetry-1.png',caption:'Sad Poetry'}]},
- love:{title:'♡ Love Poetry',label:'LOVE POETRY',images:[{file:'love-poetry-1.png',caption:'Love Poetry'}]},
- islamic:{title:'☪ Islamic Poetry',label:'ISLAMIC POETRY',images:[]}
-};
-let currentPage='home';
-function goTo(page){currentPage=page;document.getElementById('homePage').classList.toggle('hidden',page!=='home');document.getElementById('categoryPage').classList.toggle('hidden',page==='home');document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.page===page));if(page!=='home')renderGallery(page);window.scrollTo({top:0,behavior:'smooth'});}
-function renderGallery(page){const data=collections[page];document.getElementById('categoryTitle').textContent=data.title;const gallery=document.getElementById('gallery');gallery.innerHTML='';if(!data.images.length){gallery.innerHTML='<div class="empty">New poetry images will be added here soon.</div>';return;}data.images.forEach(item=>{const card=document.createElement('article');card.className='photo-card';const img=document.createElement('img');img.src=item.file;img.alt=data.label+' image';img.loading='lazy';img.addEventListener('click',()=>openLightbox(item.file));img.onerror=()=>{card.innerHTML='<div class="empty">Image not found. Please check the image filename in GitHub.</div>';};card.appendChild(img);const meta=document.createElement('div');meta.className='photo-meta';const label=document.createElement('small');label.textContent=data.label;meta.appendChild(label);const actions=document.createElement('div');actions.className='photo-actions';const share=document.createElement('button');share.className='action-btn';share.textContent='Share';share.onclick=()=>shareImage(item.file);actions.appendChild(share);meta.appendChild(actions);card.appendChild(meta);gallery.appendChild(card);});}
-function openLightbox(src){document.getElementById('lightboxImage').src=src;document.getElementById('lightbox').classList.add('open');}document.getElementById('closeLightbox').onclick=()=>document.getElementById('lightbox').classList.remove('open');document.getElementById('lightbox').addEventListener('click',e=>{if(e.target.id==='lightbox')e.currentTarget.classList.remove('open')});
-async function shareImage(file){const url=new URL(file,location.href).href;try{if(navigator.share){await navigator.share({title:'Poetry Hub',text:'A poetry image from Poetry Hub',url});}else{await navigator.clipboard.writeText(url);alert('Image link copied.');}}catch(e){if(e.name!=='AbortError')alert('Please copy this image address: '+url);}}
-document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>goTo(b.dataset.page)));document.getElementById('homeBack').addEventListener('click',()=>goTo('home'));
-</script></body></html>
+const SUPABASE_URL = "https://cpercqgnnipatehzflez.supabase.co/rest/v1/";
+const SUPABASE_KEY = "sb_publishable_-VlXeoY_jruqCIDV3zT9EQ_rY4Gtvqw";
+const ADMIN_UID = "04ac9f6c-6b5c-4c4e-a5ac-0674a506ba94";
+
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let currentUser = null;
+let selectedCategory = "all";
+
+function message(text) {
+  document.getElementById("message").textContent = text;
+}
+
+function updateAdminPanel() {
+  const isAdmin = currentUser && currentUser.id === ADMIN_UID;
+  document.getElementById("loginBox").classList.toggle("hidden", !!isAdmin);
+  document.getElementById("adminBox").classList.toggle("hidden", !isAdmin);
+}
+
+async function login() {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+
+  if (!email || !password) {
+    message("براہ کرم Email اور Password درج کریں۔");
+    return;
+  }
+
+  message("Login ہو رہا ہے...");
+  const { data, error } = await db.auth.signInWithPassword({
+    email, password
+  });
+
+  if (error) {
+    message("Login نہیں ہو سکا: " + error.message);
+    return;
+  }
+
+  if (data.user.id !== ADMIN_UID) {
+    await db.auth.signOut();
+    currentUser = null;
+    updateAdminPanel();
+    message("یہ اکاؤنٹ Admin نہیں ہے۔");
+    return;
+  }
+
+  currentUser = data.user;
+  updateAdminPanel();
+  message("Admin Login کامیاب ہوگیا۔");
+}
+
+async function logout() {
+  await db.auth.signOut();
+  currentUser = null;
+  updateAdminPanel();
+  message("آپ Logout ہوگئے ہیں۔");
+}
+
+function showCategory(category) {
+  selectedCategory = category;
+  document.getElementById("galleryTitle").textContent =
+    category === "all" ? "All Poetry" :
+    category === "sad" ? "Sad Poetry" :
+    category === "love" ? "Love Poetry" : "Islamic Poetry";
+  loadImages();
+}
+
+async function loadImages() {
+  const gallery = document.getElementById("gallery");
+  gallery.replaceChildren();
+
+  let request = db.from("poetry_images").select("*")
+    .order("created_at", { ascending: false });
+
+  if (selectedCategory !== "all") {
+    request = request.eq("category", selectedCategory);
+  }
+
+  const { data, error } = await request;
+
+  if (error) {
+    message("تصاویر لوڈ نہیں ہو سکیں: " + error.message);
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    gallery.textContent = "ابھی اس کیٹیگری میں کوئی تصویر موجود نہیں۔";
+    return;
+  }
+
+  data.forEach(item => {
+    const { data: imageData } = db.storage
+      .from("poetry-images")
+      .getPublicUrl(item.image_path);
+
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const img = document.createElement("img");
+    img.src = imageData.publicUrl;
+    img.alt = "Poetry Image";
+    img.loading = "lazy";
+    card.appendChild(img);
+
+    const caption = document.createElement("p");
+    caption.textContent = item.caption || "";
+    card.appendChild(caption);
+
+    const share = document.createElement("button");
+    share.textContent = "Share Image";
+    share.onclick = () => shareImage(imageData.publicUrl);
+    card.appendChild(share);
+
+    if (currentUser && currentUser.id === ADMIN_UID) {
+      const del = document.createElement("button");
+      del.textContent = "Delete";
+      del.onclick = () => deleteImage(item);
+      card.appendChild(del);
+    }
+
+    gallery.appendChild(card);
+  });
+}
+
+async function uploadImage() {
+  if (!currentUser || currentUser.id !== ADMIN_UID) {
+    message("صرف Admin تصویر اپلوڈ کر سکتا ہے۔");
+    return;
+  }
+
+  const file = document.getElementById("imageFile").files[0];
+  const category = document.getElementById("category").value;
+  const caption = document.getElementById("caption").value.trim();
+
+  if (!file) {
+    message("پہلے تصویر منتخب کریں۔");
+    return;
+  }
+
+  if (!file.type.startsWith("image/")) {
+    message("صرف Image فائل منتخب کریں۔");
+    return;
+  }
+
+  if (file.size > 50 * 1024 * 1024) {
+    message("تصویر 50MB سے چھوٹی ہونی چاہیے۔");
+    return;
+  }
+
+  const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+  const path = category + "/" + Date.now() + "-" + safeName;
+
+  message("تصویر اپلوڈ ہو رہی ہے...");
+
+  const { error: uploadError } = await db.storage
+    .from("poetry-images")
+    .upload(path, file);
+
+  if (uploadError) {
+    message("Upload Error: " + uploadError.message);
+    return;
+  }
+
+  const { error: insertError } = await db
+    .from("poetry_images")
+    .insert({
+      category: category,
+      image_path: path,
+      caption: caption
+    });
+
+  if (insertError) {
+    await db.storage.from("poetry-images").remove([path]);
+    message("تصویر کی تفصیل محفوظ نہیں ہوئی: " + insertError.message);
+    return;
+  }
+
+  document.getElementById("imageFile").value = "";
+  document.getElementById("caption").value = "";
+  message("تصویر کامیابی سے اپلوڈ ہوگئی۔");
+  showCategory(category);
+}
+
+async function deleteImage(item) {
+  if (!currentUser || currentUser.id !== ADMIN_UID) {
+    message("صرف Admin تصویر ڈیلیٹ کر سکتا ہے۔");
+    return;
+  }
+
+  if (!confirm("کیا آپ واقعی یہ تصویر ڈیلیٹ کرنا چاہتے ہیں؟")) return;
+
+  const { error: rowError } = await db
+    .from("poetry_images")
+    .delete()
+    .eq("id", item.id);
+
+  if (rowError) {
+    message("Delete Error: " + rowError.message);
+    return;
+  }
+
+  const { error: fileError } = await db.storage
+    .from("poetry-images")
+    .remove([item.image_path]);
+
+  if (fileError) {
+    message("ریکارڈ ڈیلیٹ ہوگیا، مگر Storage فائل نہیں ہٹی: " + fileError.message);
+  } else {
+    message("تصویر ڈیلیٹ ہوگئی۔");
+  }
+
+  loadImages();
+}
+
+async function shareImage(url) {
+  try {
+    if (navigator.share) {
+      await navigator.share({
+        title: "Poetry Hub",
+        text: "Poetry Hub پر یہ تصویر دیکھیں",
+        url: url
+      });
+    } else if (navigator.clipboard) {
+      await navigator.clipboard.writeText(url);
+      message("تصویر کا لنک Copy ہوگیا۔");
+    } else {
+      message("اس براؤزر میں Share دستیاب نہیں۔");
+    }
+  } catch (error) {
+    if (error.name !== "AbortError") {
+      message("Share نہیں ہو سکا۔");
+    }
+  }
+}
+
+async function startWebsite() {
+  const { data } = await db.auth.getSession();
+  currentUser = data.session ? data.session.user : null;
+
+  if (currentUser && currentUser.id !== ADMIN_UID) {
+    await db.auth.signOut();
+    currentUser = null;
+  }
+
+  updateAdminPanel();
+  loadImages();
+
+  db.auth.onAuthStateChange((_event, session) => {
+    currentUser = session ? session.user : null;
+    if (currentUser && currentUser.id !== ADMIN_UID) {
+      currentUser = null;
+      db.auth.signOut();
+    }
+    updateAdminPanel();
+    loadImages();
+  });
+}
+
+startWebsite();
+</script>
+</body>
+</html>
